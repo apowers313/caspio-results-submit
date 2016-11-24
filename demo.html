@@ -1,0 +1,70 @@
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Mocha Tests</title>
+    <link href="https://cdn.rawgit.com/mochajs/mocha/2.2.5/mocha.css" rel="stylesheet" />
+    <link href="caspio-results-submit.css" rel="stylesheet" />
+</head>
+
+<body>
+    <div id="mocha-results">
+        PASSED!
+        <br>
+        <h2>Your test has passed. If you are done testing and don't plan to make any further changes to your implementation, you may register your results with the FIDO Certification Secretariat now by submitting the form below.<h2>
+        <h2>If you need a Company GUID you may request one through the <a href="https://fidoalliance.org/test-tool-access-request/">Test Tool Access Request form</a> on the FIDO Alliance website.</h2>
+        <p>
+            <input type="hidden" id="tool-version" name="version" value="0.8.0">
+            <input type="hidden" id="protocol-family" name="version" value="UAF">
+            <input type="hidden" id="protocol-version" name="version" value="1.0">
+            <label for="guid">Company GUID</label>&nbsp;&nbsp;
+            <input id="guid" name="guid" size="36" maxlength="36" pattern="^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$" required>
+            <br>
+            <label for="product">Product Name</label>&nbsp;&nbsp;
+            <input id="product" name="product" size="64" maxlength="256" required>
+            <br>
+            <label for="aaid">AAID</label>&nbsp;&nbsp;
+            <input id="aaid" name="aaid" size="9" maxlength="9" pattern="^[0-9a-f]{4}#[0-9a-f]{4}$" required>
+            <br>
+            <br>
+            <button onclick="submitResults()">Submit</button>
+        </p>
+    </div>
+    <div id="mocha"></div>
+    <script src="https://cdn.rawgit.com/jquery/jquery/2.1.4/dist/jquery.min.js"></script>
+    <script src="https://cdn.rawgit.com/Automattic/expect.js/0.3.1/index.js"></script>
+    <script src="https://cdn.rawgit.com/mochajs/mocha/v3.1.2/mocha.js"></script>
+    <!-- here's the script we are showing off... -->
+    <script src="https://cdn.rawgit.com/apowers313/mocha-reporter-html-json/v1/mocha-reporter-html-json.js"></script>
+    <script src="caspio-results-submit.js"></script>
+    <script>
+    // mocha.setup('bdd');
+    Mocha.reporters.htmlJson = mochaReporterHtmlJson;
+    mocha.setup({
+        reporter: "htmlJson",
+        ui: "bdd"
+    });
+    </script>
+    <script>
+    describe("This is a test", function() {
+        it("Is only a test of the emergency broadcast system", function() {
+            console.log("*** BEEEEEEEEEP BURWUWUWURP MNEEEEEEEEEEHP GHRRRRRRRHP ***");
+            return true;
+        });
+        it("beep", function() {});
+    });
+    describe("Another test suite", function() {
+        it("another test", function() {});
+    });
+    </script>
+    <script>
+    mocha.checkLeaks();
+    mocha.globals(['jQuery']);
+    mocha.run();
+
+    /* JSHINT */
+    /* globals Mocha, mocha, mochaReporterHtmlJson */
+    </script>
+</body>
+
+</html>
